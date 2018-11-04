@@ -3,6 +3,7 @@ import csv
 file = 'bitcointweets.csv'
 neg_tweet = []
 pos_tweet = []
+neutral_tweet = []
 with open(file, encoding="utf8") as fh:
     rd = csv.DictReader(fh, delimiter=',')
     for row in rd:
@@ -10,6 +11,8 @@ with open(file, encoding="utf8") as fh:
             pos_tweet.append(row)
         if row['sentiment'] == "negative":
             neg_tweet.append(row)
+        if row['sentiment'] == "neutral":
+            neutral_tweet.append(row)
 
 with open('pos_tweet.csv', encoding="utf8", mode='w') as pos_file:
     fieldnames = ['tweet', 'sentiment']
@@ -26,3 +29,11 @@ with open('neg_tweet.csv', encoding="utf8", mode='w') as neg_file:
     writer.writeheader()
     for neg in neg_tweet:
         writer.writerow(neg)
+
+with open('neutral_tweet.csv', encoding="utf8", mode='w') as neu_file:
+    fieldnames = ['tweet', 'sentiment']
+    writer = csv.DictWriter(neu_file, fieldnames=fieldnames)
+
+    writer.writeheader()
+    for neu in neutral_tweet:
+        writer.writerow(neu)
