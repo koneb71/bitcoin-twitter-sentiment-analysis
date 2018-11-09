@@ -7,8 +7,8 @@ import time
 import tweepy
 import codecs
 
-from twitter_stream_listener import TwitterStreamListener
-from sentiment_analysis import TwitterSentimentAnalysis
+from ML.twitter_stream_listener import TwitterStreamListener
+from ML.sentiment_analysis import TwitterSentimentAnalysis
 
 sys.stdout = codecs.getwriter("iso-8859-1")(sys.stdout, 'xmlcharrefreplace')
 
@@ -31,8 +31,6 @@ class TwitterBot:
         return data['bpi']['USD']['rate_float']
 
     def run(self):
-        # cashtag = ["$btcusd"]
-        # cashtag = ["$btcusd", "#bitcoin"]
         listener = TwitterStreamListener()
         sentiment_analyzer = TwitterSentimentAnalysis()
         stream = tweepy.Stream(auth=auth, listener=listener)

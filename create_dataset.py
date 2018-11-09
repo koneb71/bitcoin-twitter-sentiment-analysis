@@ -14,7 +14,7 @@ with open(file, encoding="utf8") as fh:
         if row['sentiment'] == "neutral":
             neutral_tweet.append(row)
 
-with open('pos_tweet.csv', encoding="utf8", mode='w') as pos_file:
+with open('datasets/pos_tweet.csv', encoding="utf8", mode='w') as pos_file:
     fieldnames = ['tweet', 'sentiment']
     writer = csv.DictWriter(pos_file, fieldnames=fieldnames)
 
@@ -22,7 +22,7 @@ with open('pos_tweet.csv', encoding="utf8", mode='w') as pos_file:
     for pos in pos_tweet:
         writer.writerow(pos)
 
-with open('neg_tweet.csv', encoding="utf8", mode='w') as neg_file:
+with open('datasets/neg_tweet.csv', encoding="utf8", mode='w') as neg_file:
     fieldnames = ['tweet', 'sentiment']
     writer = csv.DictWriter(neg_file, fieldnames=fieldnames)
 
@@ -30,7 +30,7 @@ with open('neg_tweet.csv', encoding="utf8", mode='w') as neg_file:
     for neg in neg_tweet:
         writer.writerow(neg)
 
-with open('neutral_tweet.csv', encoding="utf8", mode='w') as neu_file:
+with open('datasets/neutral_tweet.csv', encoding="utf8", mode='w') as neu_file:
     fieldnames = ['tweet', 'sentiment']
     writer = csv.DictWriter(neu_file, fieldnames=fieldnames)
 

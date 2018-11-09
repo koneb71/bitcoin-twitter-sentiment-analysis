@@ -28,28 +28,29 @@ class BitCoinTweetClassifier(object):
 
     def train(self):
         # with open('pos_tweet.csv', encoding="utf8", mode='r') as pos_tweet:
-        with open('pos_tweet.csv', mode='r') as pos_tweet:
+        with open('datasets/pos_tweet.csv', mode='r') as pos_tweet:
             pos = csv.DictReader(pos_tweet, delimiter=',')
             for ptweet in pos:
                 self.pos_tweets.append((bag_of_words(ptweet['tweet']), 'positive'))
 
         # with open('neg_tweet.csv', encoding="utf8", mode='r') as neg_tweet:
-        with open('neg_tweet.csv', mode='r') as neg_tweet:
+        with open('datasets/neg_tweet.csv', mode='r') as neg_tweet:
             neg = csv.DictReader(neg_tweet, delimiter=',')
             for ntweet in neg:
                 self.neg_tweets.append((bag_of_words(ntweet['tweet']), 'negative'))
 
         # with open('neg_tweet.csv', encoding="utf8", mode='r') as neu_tweet:
-        with open('neg_tweet.csv', mode='r') as neu_tweet:
-            neu = csv.DictReader(neu_tweet, delimiter=',')
-            for neutweet in neu:
-                self.neu_tweets.append((bag_of_words(neutweet['tweet']), 'neutral'))
+        # with open('neg_tweet.csv', mode='r') as neu_tweet:
+        #     neu = csv.DictReader(neu_tweet, delimiter=',')
+        #     for neutweet in neu:
+        #         self.neu_tweets.append((bag_of_words(neutweet['tweet']), 'neutral'))
 
         shuffle(self.pos_tweets)
         shuffle(self.neg_tweets)
-        shuffle(self.neu_tweets)
-        self.all_train_set = self.pos_tweets + self.neg_tweets + self.neu_tweets
-        return NaiveBayesClassifier.train(self.all_train_set)
+        #shuffle(self.neu_tweets)
+        self.all_train_set = self.pos_tweets + self.neg_tweets# + self.neu_tweets
+        trained = NaiveBayesClassifier.train(self.all_train_set)
+        return trained
 # accuracy = classify.accuracy(classifier, test_set)
 # print(accuracy)
 # # print(classifier.show_most_informative_features(10))
